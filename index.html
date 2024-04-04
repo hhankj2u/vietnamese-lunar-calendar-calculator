@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <script src="amlich-hnd.js"></script>
+    <script type="text/javascript">
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const date = new Date(urlParams.get('date'));
+        const lunarDate = getLunarDate(date.getDate(), date.getMonth() + 1, date.getFullYear());
+        document.write(lunarDate.day + "/" + lunarDate.month);
+    </script>
+</body>
+
+</html>
