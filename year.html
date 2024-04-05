@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <script src="amlich-hnd.js"></script>
+    <script type="text/javascript">        
+        function getDaysInYear(year) {
+            var result = {};
+            var currentDate = new Date(year, 0, 1); // January 1st of the specified year
+        
+            // Loop through each day of the year
+            while (currentDate.getFullYear() == year) {
+                var date = new Date(currentDate);
+                currentDate.setDate(currentDate.getDate() + 1); // Move to the next day
+                const lunarDate = getLunarDate(date.getDate(), date.getMonth() + 1, date.getFullYear());
+                result[`${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`] = `${lunarDate.day}/${lunarDate.month} ${getYearCanChi(lunarDate.year)}`;                
+            }
+        
+            document.write(JSON.stringify(result));
+        }
+        
+        var year = new Date().getFullYear();
+        getDaysInYear(year);
+    </script>
+</body>
+
+</html>
