@@ -1044,7 +1044,7 @@ class ReportParserGenerate extends ReportParserBase
                         if ($tags[0] != 'DEAT') {
                             $tmp   = new Date($value);
                             $value = strip_tags($tmp->display());
-                        } 
+                        }
                         break;
                     case 'PLAC':
                         $tmp   = new Place($value, $this->tree);
@@ -2815,12 +2815,10 @@ class ReportParserGenerate extends ReportParserBase
                 return strtr($value, ['/' => '']);
             }
 
-            if ($tag === 'DEAT:DATE') {                
-                if (strlen($value) > 4) {
-                    $amLich = implode('-' , $this->getCurlDate('https://192.168.1.100/lunar/index.php?date=' . date("Y-m-d", strtotime($value))));                    
-                    $convertThisYear = $this->getCurlDate('https://192.168.1.100/lunar/index.php?date_al='.date('Y').'-'.date("m-d", strtotime($amLich)));
-                    return $value . " \nAL: " . $amLich . " \nDL: " . $convertThisYear;
-                }
+            if ($tag === 'DEAT:DATE' && strlen($value) > 4) {
+                $amLich = implode('-' , $this->getCurlDate('https://192.168.1.100/lunar/index.php?date=' . date("Y-m-d", strtotime($value))));                    
+                $convertThisYear = $this->getCurlDate('https://192.168.1.100/lunar/index.php?date_al='.date('Y').'-'.date("m-d", strtotime($amLich) - 86400));
+                return $value . " \nAL: " . $amLich . " \nDL: " . $convertThisYear;
             }
             return $value;
         }
